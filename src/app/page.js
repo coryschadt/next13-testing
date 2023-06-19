@@ -1,24 +1,46 @@
 import Image from 'next/image'
-import styles from './page.module.css'
 
-export default function Home() {
+import styles from './page.module.css'
+import Link from 'next/link'
+
+async function getData() {
+  const res = await fetch('https://dog.ceo/api/breeds/image/random')
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+
+  return res.json()
+}
+
+export default async function Home() {
+  const data = await getData()
+
+  console.log(data)
+
   return (
     <main className={styles.main}>
+      <img src={data.message} alt='' />
+
+      {/* {data.map((f) => (
+        <div key={f.fact}>{f.fact}</div>
+      ))} */}
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>src/app/page.js</code>
+          <Link href='/about'>About</Link>
         </p>
         <div>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href='https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
+            target='_blank'
+            rel='noopener noreferrer'
           >
             By{' '}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
+              src='/vercel.svg'
+              alt='Vercel Logo'
               className={styles.vercelLogo}
               width={100}
               height={24}
@@ -31,8 +53,8 @@ export default function Home() {
       <div className={styles.center}>
         <Image
           className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
+          src='/next.svg'
+          alt='Next.js Logo'
           width={180}
           height={37}
           priority
@@ -41,10 +63,10 @@ export default function Home() {
 
       <div className={styles.grid}>
         <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Docs <span>-&gt;</span>
@@ -53,10 +75,10 @@ export default function Home() {
         </a>
 
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Learn <span>-&gt;</span>
@@ -65,10 +87,10 @@ export default function Home() {
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Templates <span>-&gt;</span>
@@ -77,10 +99,10 @@ export default function Home() {
         </a>
 
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Deploy <span>-&gt;</span>
