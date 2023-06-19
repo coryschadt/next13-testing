@@ -4,7 +4,9 @@ import styles from './page.module.css'
 import Link from 'next/link'
 
 async function getData() {
-  const res = await fetch('https://dog.ceo/api/breeds/image/random')
+  const res = await fetch(
+    'https://api.artic.edu/api/v1/artworks?page=2&limit=100'
+  )
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -20,11 +22,18 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      <img src={data.message} alt='' />
+      {/* <img src={data.message} alt='' /> */}
 
-      {/* {data.map((f) => (
-        <div key={f.fact}>{f.fact}</div>
-      ))} */}
+      {data.data.map((d) => (
+        <div key={d.id}>
+          {d.title}
+
+          <img
+            src={`https://www.artic.edu/iiif/2/${d.image_id}/full/843,/0/default.jpg`}
+            alt=''
+          />
+        </div>
+      ))}
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
