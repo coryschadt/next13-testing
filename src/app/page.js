@@ -22,18 +22,28 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      {/* <img src={data.message} alt='' /> */}
+      <div className={styles.grid}>
+        {data.data.map((d) => (
+          <div key={d.id}>
+            {d.title}
 
-      {data.data.map((d) => (
-        <div key={d.id}>
-          {d.title}
+            <Image
+              style={{ objectFit: 'cover' }}
+              src={`https://www.artic.edu/iiif/2/${d.image_id}/full/843,/0/default.jpg`}
+              alt='Vercel Logo'
+              className={styles.vercelLogo}
+              width={400}
+              height={400}
+              priority
+            />
 
-          <img
+            {/* <img
             src={`https://www.artic.edu/iiif/2/${d.image_id}/full/843,/0/default.jpg`}
             alt=''
-          />
-        </div>
-      ))}
+          /> */}
+          </div>
+        ))}
+      </div>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
